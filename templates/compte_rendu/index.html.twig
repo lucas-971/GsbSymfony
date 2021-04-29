@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des comptes-rendus{% endblock %}
+
+{% block content %}
+
+<div class="bg-gray-300 m-10 border-2 border-gray-500">
+
+  <div class="grid grid-cols-8 gap-10">
+    <!-- 1 -->
+    <div class="col-span-2 m-5">
+        <form action="" class="grid grid-flow-row gap-5">
+            <div>
+                <label>Sélectionner visiteur</label>
+                <select class="w-full" name="" id="">
+                {% for visiteur in visiteurs %}
+                        
+                        <option value="{{ visiteur.id }}">{{ visiteur.nom }} {{ visiteur.prenom }}</option>
+                {% endfor %}
+
+                </select>
+            </div>
+            <div>
+                <label>Mois</label>
+                <select class="w-full" name="" id="">
+                {% for i in 1..12 %}
+                        
+                        <option value="{{ i }}">{{ i }} </option>
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label>Année</label>
+                <select class="w-full" name="" id="">
+                {% for i in 1970..2021 %}
+                <option value="{{ i }}">{{ i }} </option>
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <button class="transition duration-500 bg-green-500 text-white w-full rounded-md hover:bg-green-600" type="submit">Afficher</button>
+            </div>
+        </form>
+    </div>
+    <!-- 2 -->
+    <div class="col-span-6 m-5">
+
+        <div class="bg-white border-2 border-gray-400">
+            
+            <div class="m-3">
+                <table class="table-auto w-full">
+
+                    <tr class="">
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Nom</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Prenom</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Ville</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Date Visite</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Date Rédaction</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Lu</p></td>
+                        <td class="border border-black p-1 " ><p class="flex justify-center">Consulter</p></td>
+                    </tr>
+
+                    <tr class="">
+                        {# foreach #}
+                        <td class="border border-black p-1 " >
+                        {% for visiteur in visiteurs %}
+                        
+                        <p>{{ visiteur.nom }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1 " >
+                        {% for visiteur in visiteurs %}
+                        
+                        <p>{{ visiteur.prenom }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1 " >
+                        {% for visiteur in visiteurs %}
+                        
+                        <p>{{ visiteur.ville }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1 " >
+                        {% for rapportvisite in rapportvisites %}
+                        
+                        <p>{{ rapportvisite.dateVisite }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1 " >
+                        {% for rapportvisite in rapportvisites %}
+                        
+                        <p>{{ rapportvisite.dateRapport }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1 " >
+                        {% for rapportvisite in rapportvisites %}
+                        
+                        <p>{{ rapportvisite.etat }}</p>
+                        {% endfor %}
+                        </td>
+                        <td class="border border-black p-1" >
+                        {% for rapportvisite in rapportvisites %}
+                        
+                        <p><a href="/compterendu/show/{{rapportvisite.id}}" >Consulter</a></p>
+
+                        {% endfor %}
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
