@@ -47,4 +47,27 @@ class CompteRenduController extends AbstractController
             'rapportvisite' => $rapportvisite,
         ]);
     }
+    /**
+     * @Route("/compterendu/create", name="compte_rendu_create" )
+     */
+    public function create(Request $request)
+    {
+        $rapportvisite= new RapportVisite();
+        $form = $this->createForm(RapportVisiteType::class, $rapportvisite);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()){
+            $this->em->persist($rapportvisite);
+            $this->em->flush();
+            return $this->redirectToRoute('compte_rendu');
+            }
+            
+            return $this->render('compte_rendu/create.html.twig', [
+            'rapportvisite'=> $rapportvisite,
+            'form' => $form->createView()
+
+            ]);
+            
+
+    }
 }
